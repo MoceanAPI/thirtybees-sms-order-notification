@@ -1,0 +1,47 @@
+author: MoceanAPI
+category: marketing
+compatible_versions: 1.0.0+
+description: description.md
+description_short: "Make your thirty bees store more user friendly by giving your store the capabilities of notifying your customers about order status."
+gdpr_compliant: true
+license: OSL
+localization:
+- EN
+- CS
+module_name: "BulkGate module"
+php_version:
+- 5.3
+- 5.4
+- 5.5
+- 5.6
+tags:
+- sms
+- send sms
+- sms notifications
+- bulk sms
+- thirty bees
+- thirty bees sms
+- sms thirty bees
+- sms order
+- customer notification
+- notify admin
+- sms campaign
+- sms plugin
+- sms module
+- eshop
+- ecommerce
+- sms marketing
+- target marketing
+- sms api
+- sms gateway
+- sms alerts
+- alerts
+- notifications
+- order status 
+- marketing campaigns
+- custom hooks
+- thirty bees sms notifications
+- affiliate program
+- order sms notifications
+- sms notification module
+- moceanapi

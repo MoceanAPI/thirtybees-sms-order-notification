@@ -9,7 +9,7 @@ Thirty Bees SMS Order Notification integration with MoceanAPI
 
 
 # Configuration
-After successful installation of the module  you will need to set up the module with the basic settings. You must enter “Mocean Key” , “Mocean Secret” and “Mocean From”
+After successful installation of the module  you will need to set up the module with the basic settings. You must enter “MoceanAPI Key” , “MoceanAPI Secret” and “MoceanAPI From”
 
 
 # Admin Notification
@@ -21,7 +21,7 @@ From this section you can turn off or include a status with its message.
 After changing the status in a order , the user will receive an SMS notification on his phone number
 Note: In all message fields you can use the special characters from the section “Special Chars”
 
-# MoceanSMS Notify History
+# MoceanAPI Notify History
 Each sent message is saved in a log
 
 
