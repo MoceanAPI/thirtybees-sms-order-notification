@@ -1,6 +1,8 @@
 # thirtybees-moceanapi-sms-order-notification
 Thirty Bees SMS Order Notification integration with MoceanAPI
 
+Try for FREE now. 20 trial SMS credits will be given upon [registration](https://dashboard.moceanapi.com/register?fr=thirtybees_order_notification). Additional SMS credits can be requested and is subject to approval by MoceanAPI
+
 # Setup instruction
 
 1. Log in to your admin panel and open “Modules and Services” page
