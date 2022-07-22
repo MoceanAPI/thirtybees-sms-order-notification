@@ -5,7 +5,7 @@ Try for FREE now. 20 trial SMS credits will be given upon [registration](https:/
 
 # Setup instruction
 
-1. Download the latest `moceanapinotify.zip` from our [release page](https://github.com/MoceanAPI/thirtybees-moceanapi-sms-order-notification/releases)
+1. Download the latest `moceanapinotify.zip` from our [release page](https://github.com/MoceanAPI/thirtybees-sms-order-notification/releases)
 2. Log in to your admin panel and open “Modules and Services” page
 3. Click on “Add a new module” button and then upload the `moceanapinotify.zip` file you downloaded to your device.
 4. After successfully uploading the module, click the “Install” button
