@@ -26,5 +26,3 @@ Note: In all message fields you can use the special characters from the section 
 
 # MoceanAPI Notify History
 Each sent message is saved in a log
-
-

@@ -23,7 +23,7 @@ jobs:
           tag_name: ${{ github.ref }}
           release_name: Release ${{ github.ref }}
           body: |
-            Test upload-to-github-release works with ```actions/create-release```
+            Upload release
           draft: true
           prerelease: false
       - uses: xresloader/upload-to-github-release@master
@@ -33,6 +33,5 @@ jobs:
           file: "moceanapinotify.zip"
           release_id: ${{ steps.create_release.outputs.id }}
           overwrite: true
-          verbose: true
-          draft: false
+          draft: true
           update_latest_release: true
