@@ -23,7 +23,7 @@ jobs:
           tag_name: ${{ github.ref }}
           release_name: Release ${{ github.ref }}
           body: |
-            Upload release
+            Packaged release for thirtybees
           draft: true
           prerelease: false
       - uses: xresloader/upload-to-github-release@master
@@ -33,5 +33,5 @@ jobs:
           file: "moceanapinotify.zip"
           release_id: ${{ steps.create_release.outputs.id }}
           overwrite: true
-          draft: true
+          draft: false
           update_latest_release: true
