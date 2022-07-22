@@ -5,10 +5,18 @@ description: description.md
 description_short: "Make your thirty bees store more user friendly by giving your store the capabilities of notifying your customers about order status."
 gdpr_compliant: true
 license: OSL
+images:
+  - image-1.png
+  - image-2.png
+  - image-3.png
+  - image-4.png
+  - image-5.png
+  - image-6.png
+  - image-7.png
 localization:
 - EN
 - CS
-module_name: "BulkGate module"
+module_name: "MoceanAPI module"
 php_version:
 - 5.3
 - 5.4
@@ -23,6 +31,7 @@ tags:
 - thirty bees sms
 - sms thirty bees
 - sms order
+- sms order notification
 - customer notification
 - notify admin
 - sms campaign
@@ -37,11 +46,12 @@ tags:
 - sms alerts
 - alerts
 - notifications
-- order status 
+- order status
 - marketing campaigns
 - custom hooks
 - thirty bees sms notifications
 - affiliate program
 - order sms notifications
+- order notifications via sms
 - sms notification module
 - moceanapi

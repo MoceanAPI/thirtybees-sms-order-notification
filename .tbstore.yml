@@ -8,12 +8,13 @@ license: OSL
 localization:
 - EN
 - CS
-module_name: "BulkGate module"
+module_name: "MoceanAPI SMS module"
 php_version:
 - 5.3
 - 5.4
 - 5.5
 - 5.6
+- 7.4
 tags:
 - sms
 - send sms
@@ -37,7 +38,7 @@ tags:
 - sms alerts
 - alerts
 - notifications
-- order status 
+- order status
 - marketing campaigns
 - custom hooks
 - thirty bees sms notifications
