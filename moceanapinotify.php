@@ -7,7 +7,7 @@ if (!defined('_PS_VERSION_')) {
 
 class MoceanAPINotify extends Module
 {
-    
+
     const MOCEAN_API_NOTIFY_KEY = 'MOCEAN_API_NOTIFY_KEY';
     const MOCEAN_API_NOTIFY_SECRET = 'MOCEAN_API_NOTIFY_SECRET';
     const MOCEAN_API_FROM = 'MOCEAN_API_FROM';
@@ -26,7 +26,7 @@ class MoceanAPINotify extends Module
         $this->bootstrap        = true;
         $this->controller_name  = 'AdminMoceanAPINotify';
         parent::__construct();
-        
+
         $this->displayName      = $this->l('Mocean SMS API Notification');
         $this->description      = $this->l('MoceanAPI Send SMS for ThirtyBees');
         $this->confirmUninstall = $this->l('This module will be removed from your store. Are you sure?');
@@ -42,22 +42,22 @@ class MoceanAPINotify extends Module
             'dashboardZoneTwo'
             );
     }
-    
-    
+
+
     public function install($createTables = true)
     {
         if (!parent::install()) {
             return false;
         }
-    
+
         Configuration::updateGlobalValue(static::MOCEAN_API_NOTIFY_KEY, '');
         Configuration::updateGlobalValue(static::MOCEAN_API_NOTIFY_SECRET, '');
         Configuration::updateGlobalValue(static::MOCEAN_API_FROM, '');
-        
+
         Configuration::updateGlobalValue(static::MOCEAN_API_ADMIN_ENABLE_NOTIFY, true);
         Configuration::updateGlobalValue(static::MOCEAN_API_ADMIN_PHONE, '');
         Configuration::updateGlobalValue(static::MOCEAN_API_ADMIN_MESSAGE, '');
-        
+
         Configuration::updateGlobalValue(static::MOCEAN_API_DEFAULT_MESSAGE, '');
 
         if ($createTables) {
@@ -72,7 +72,7 @@ class MoceanAPINotify extends Module
                   `status` int(11) NOT NULL
                 ) ENGINE=InnoDB DEFAULT CHARSET=utf8'
             );
-            
+
             \Db::getInstance()->execute("ALTER TABLE `"._DB_PREFIX_."moceansms_notify_log` ADD PRIMARY KEY(`id`);");
             \Db::getInstance()->execute("ALTER TABLE `"._DB_PREFIX_."moceansms_notify_log` CHANGE `id` `id` INT(11) NOT NULL AUTO_INCREMENT;");
         }
@@ -197,7 +197,7 @@ class MoceanAPINotify extends Module
 
         return $helper;
     }
-    
+
     public function getMoceanAdminFormHelper()
     {
         unset($this->fieldsForm);
@@ -282,14 +282,14 @@ class MoceanAPINotify extends Module
 
         return $helper;
     }
-    
-    
+
+
     protected function getMoceanCustomersFormHelper($orders) {
         unset($this->fieldsForm);
         $defaultLang = (int) Configuration::get('PS_LANG_DEFAULT');
         $this->fieldsForm[0]['form'] = [
         'legend' => [
-            'title' => $this->l('Mocean Admin Notification'),
+            'title' => $this->l('Mocean User Notification'),
             'icon'  => 'icon-user',
         ]
         ];
@@ -360,7 +360,7 @@ class MoceanAPINotify extends Module
         $helper->fields_value = $this->getFormValues();
         return $helper;
     }
-    
+
     protected function getFormValues()
     {
         $vars = [
@@ -392,7 +392,7 @@ class MoceanAPINotify extends Module
 
         $mocean_admin = $this->getMoceanAdminFormHelper();
         $mocean_admin_form = $mocean_admin->generateForm($this->fieldsForm);
-        
+
         $orders = OrderStateCore::getOrderStates(1);
         $mocean_customers = $this->getMoceanCustomersFormHelper($orders);
         $mocean_customers_form = $mocean_customers->generateForm($this->fieldsForm);
@@ -434,7 +434,7 @@ class MoceanAPINotify extends Module
             Configuration::updateValue(static::MOCEAN_API_ADMIN_MESSAGE, Tools::getValue(static::MOCEAN_API_ADMIN_MESSAGE));
             return ['success' => 'You have successfully made the changes!', 'tab' => 'admin'];
         }
-        
+
         if(Tools::isSubmit('submit'.$this->name.'customers')) {
             $orders = OrderStateCore::getOrderStates(1);
             foreach($orders as $order) {
@@ -446,10 +446,10 @@ class MoceanAPINotify extends Module
 
         return $output;
     }
-    
+
     public function hookactionOrderStatusPostUpdate($params) {
         $controller = Tools::getValue('controller');
-        
+
         $order_status = $params['newOrderStatus'];
         $order_id = $params['id_order'];
         $order = new Order($order_id);
@@ -458,13 +458,13 @@ class MoceanAPINotify extends Module
         $this->order['order_amount'] = count($order->getProducts());
         $this->order['order_status'] = $order_status->name;
         $this->order['order_product'] = $order->getProducts();
-        
+
         $customer = new Customer ($order->id_customer);
         $this->billing['payment_method'] = $order->payment;
         $var_id_address = $order->id_address_invoice;
         $address = new Address($var_id_address);
         $this->billing['payment_method'] = $order->payment;
-       
+
         $this->billing['billing_first_name'] = $customer->firstname;
         $this->billing['billing_last_name'] = $customer->lastname;
 
@@ -479,8 +479,8 @@ class MoceanAPINotify extends Module
         $mocean_key = Configuration::get(static::MOCEAN_API_NOTIFY_KEY);
         $mocean_secret = Configuration::get(static::MOCEAN_API_NOTIFY_SECRET);
         $mocean_from  = Configuration::get(static::MOCEAN_API_FROM);
-        
-        
+
+
         if($controller == 'AdminOrders') {
             $check_notify_status = Configuration::get('MOCEAN_API_STATUS_'.$order_status->id);
             if($check_notify_status == 1) {
@@ -499,9 +499,9 @@ class MoceanAPINotify extends Module
             if($admin_notify == 1) {
                 $admin_message = Configuration::get(static::MOCEAN_API_ADMIN_MESSAGE);
                 $admin_message = $this->replaceSpecialChars($admin_message, $this->specialChar());
-                
+
                 $admin_phone = Configuration::get(static::MOCEAN_API_ADMIN_PHONE);
-                $result_mocean = $this->sendMoceanSMS($mocean_key, $mocean_secret, $mocean_from, $admin_message, $admin_phone); 
+                $result_mocean = $this->sendMoceanSMS($mocean_key, $mocean_secret, $mocean_from, $admin_message, $admin_phone);
                 $response = addslashes($result_mocean);
                 $status_raw = json_decode($result_mocean);
                 $status = $status_raw->messages[0]->status;
@@ -510,14 +510,14 @@ class MoceanAPINotify extends Module
             }
         }
     }
-    
+
     public function replaceSpecialChars($message, $special_chars) {
         foreach($special_chars as $key=>$value) {
             $message = str_replace("[$key]", $value, $message);
         }
         return $message;
     }
-    
+
     public function specialChar() {
 
         $product_names = [];
@@ -549,7 +549,7 @@ class MoceanAPINotify extends Module
         return $chars;
 
     }
-    
+
     protected function getBalance($mocean_key, $mocean_secret) {
     $url = 'https://rest.moceanapi.com/rest/2/account/balance?';
 	$fields = array(
@@ -557,7 +557,7 @@ class MoceanAPINotify extends Module
 			'mocean-api-secret' => $mocean_secret,
 			'mocean-resp-format' => 'json',
 	);
-    
+
 	//url-ify the data for the POST
 	foreach($fields as $key=>$value) { $fields_string .= $key.'='.$value.'&'; }
 	rtrim($fields_string, '&');
@@ -575,8 +575,8 @@ class MoceanAPINotify extends Module
 
 	return  $result;
     }
-    
-    
+
+
     protected function sendMoceanSMS($mocean_key, $mocean_secret, $mocean_from = "New Order", $mocean_message, $mocean_phone) {
 	$url = 'https://rest.moceanapi.com/rest/2/sms';
 	$fields = array(
@@ -607,7 +607,7 @@ class MoceanAPINotify extends Module
 
 	return  $result;
     }
-    
+
     public function loadAsset()
     {
         // Load JS
@@ -618,5 +618,5 @@ class MoceanAPINotify extends Module
         // Clean memory
         unset($jss);
     }
-    
+
 }
