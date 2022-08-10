@@ -130,12 +130,15 @@ class MoceanAPINotify extends Module
 
     public function getMoceanConfigFormHelper()
     {
+
         $defaultLang = (int) Configuration::get('PS_LANG_DEFAULT');
         $this->fieldsForm['config']['form'] = [
             'legend' => [
                 'title' => $this->l('Mocean Configuration'),
                 'icon'  => 'icon-cogs',
             ],
+            'description' => '<a href="https://bit.ly/3Q0IPfJ" target="_blank" rel="noopener noreferrer">'.$this->l('Send us a feedback!').'</a><br/><br/>'.
+                            $this->l('Need help? Contact us').'&nbsp;'.'<a href="mailto:support@moceanapi.com">here!</a><br/>',
             'input'  => [
                 [
                     'type'     => 'text',
@@ -400,7 +403,12 @@ class MoceanAPINotify extends Module
         $mocean_secret = Configuration::get(static::MOCEAN_API_NOTIFY_SECRET);
         $balance = json_decode($this->getBalance($mocean_key, $mocean_secret));
         $this->loadAsset();
-        $this->context->controller->addJS(dirname(__FILE__) . 'views/js/dashbypayment.js');
+        $this->context->controller->addJS(dirname(__FILE__)  . '/views/assets/js/dashbypayment.js');
+        $this->context->controller->addJS(dirname(__FILE__)  . '/views/assets/js/cookieconsent.min.js');
+        $this->context->controller->addJS(dirname(__FILE__)  . '/views/assets/js/yandex.js');
+        $this->context->controller->addCSS(dirname(__FILE__) . '/views/assets/css/animate.min.css');
+        $this->context->controller->addCSS(dirname(__FILE__) . '/views/assets/css/cookieconsent.min.css');
+        $this->context->controller->addCSS(dirname(__FILE__) . '/views/assets/css/main.css');
         $this->context->smarty->assign(
             array(
                 'moduleName'    => $this->displayName,
@@ -412,8 +420,6 @@ class MoceanAPINotify extends Module
                 'balance' => $balance,
             )
         );
-
-
         return $this->display(__FILE__, 'views/templates/admin/configuration.tpl');
     }
 

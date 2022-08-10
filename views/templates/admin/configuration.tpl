@@ -43,7 +43,7 @@ $( this ).addClass('active');
             {include file="./tabs/users.tpl"}
         </div>
     </div>
-	
+
 	<!-- Modal Special Chars -->
 	<div id="special_tags" class="modal fade" role="dialog">
 	  <div class="modal-dialog">

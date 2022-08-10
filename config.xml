@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module>
+  <name><![CDATA[moceanapinotify]]></name>
+  <displayName><![CDATA[Mocean SMS API Notification]]></displayName>
+  <version><![CDATA[1.0.1]]></version>
+  <description><![CDATA[MoceanAPI Send SMS for ThirtyBees]]></description>
+  <author><![CDATA[Micro Ocean Technologies]]></author>
+  <author_uri/>
+  <tab><![CDATA[advertising_marketing]]></tab>
+  <confirmUninstall><![CDATA[This module will be removed from your store. Are you sure?]]></confirmUninstall>
+  <is_configurable>1</is_configurable>
+  <need_instance>1</need_instance>
+  <limited_countries/>
+</module>
