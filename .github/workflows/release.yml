@@ -1,37 +1,37 @@
-name: Create Release Package
+# name: Create Release Package
 
-# https://help.github.com/en/articles/workflow-syntax-for-github-actions#on
-on:
-  push:
-    tags:
-      - "*"
+# # https://help.github.com/en/articles/workflow-syntax-for-github-actions#on
+# on:
+#   push:
+#     tags:
+#       - "*"
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v1
-      - run: |
-          set | grep GITHUB_ | grep -v GITHUB_TOKEN
-          sh build.sh
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
-        with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
-          body: |
-            Packaged release for thirtybees
-          draft: true
-          prerelease: false
-      - uses: xresloader/upload-to-github-release@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          file: "moceanapinotify.zip"
-          release_id: ${{ steps.create_release.outputs.id }}
-          overwrite: true
-          draft: false
-          update_latest_release: true
+# jobs:
+#   build:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/checkout@v1
+#       - run: |
+#           set | grep GITHUB_ | grep -v GITHUB_TOKEN
+#           sh build.sh
+#       - name: Create Release
+#         id: create_release
+#         uses: actions/create-release@v1
+#         env:
+#           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+#         with:
+#           tag_name: ${{ github.ref }}
+#           release_name: Release ${{ github.ref }}
+#           body: |
+#             Packaged release for thirtybees
+#           draft: true
+#           prerelease: false
+#       - uses: xresloader/upload-to-github-release@master
+#         env:
+#           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#         with:
+#           file: "moceanapinotify.zip"
+#           release_id: ${{ steps.create_release.outputs.id }}
+#           overwrite: true
+#           draft: false
+#           update_latest_release: true
